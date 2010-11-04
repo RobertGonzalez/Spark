@@ -134,7 +134,7 @@ class Spark_Request {
 	 * @return mixed The value of $get[$key], or the alternate value
 	 */
 	public function get($key = null, $alt = null) {
-		return $this->_fetchValue('get', $key, $alt);
+		return $this->_arg('get', $key, $alt);
 	}
 	
 	/**
@@ -146,7 +146,7 @@ class Spark_Request {
 	 * @return mixed The value of $post[$key], or the alternate value
 	 */
 	public function post($key = null, $alt = null) {
-		return $this->_fetchValue('post', $key, $alt);
+		return $this->_arg('post', $key, $alt);
 	}
 	
 	/**
@@ -158,7 +158,7 @@ class Spark_Request {
 	 * @return mixed The value of $cookie[$key], or the alternate value
 	 */
 	public function cookie($key = null, $alt = null) {
-		return $this->_fetchValue('cookie', $key, $alt);
+		return $this->_arg('cookie', $key, $alt);
 	}
 	
 	/**
@@ -170,7 +170,7 @@ class Spark_Request {
 	 * @return mixed The value of $env[$key], or the alternate value
 	 */
 	public function env($key = null, $alt = null) {
-		return $this->_fetchValue('env', $key, $alt);
+		return $this->_arg('env', $key, $alt);
 	}
 	
 	/**
@@ -182,7 +182,7 @@ class Spark_Request {
 	 * @return mixed The value of $server[$key], or the alternate value
 	 */
 	public function server($key = null, $alt = null) {
-		return $this->_fetchValue('server', $key, $alt);
+		return $this->_arg('server', $key, $alt);
 	}
 	
 	/**
@@ -194,7 +194,7 @@ class Spark_Request {
 	 * @return mixed The value of $files[$key], or the alternate value
 	 */
 	public function files($key = null, $alt = null) {
-		return $this->_fetchValue('files', $key, $alt);
+		return $this->_arg('files', $key, $alt);
 	}
 	
 	/**
@@ -206,7 +206,7 @@ class Spark_Request {
 	 * @return mixed The value of $argv[$key], or the alternate value
 	 */
 	public function argv($key = null, $alt = null) {
-		return $this->_fetchValue('argv', $key, $alt);
+		return $this->_arg('argv', $key, $alt);
 	}
 	
 	/**
@@ -218,7 +218,7 @@ class Spark_Request {
 	 * @return mixed The value of $uri[$key], or the alternate value
 	 */
 	public function uri($key = null, $alt = null) {
-		return $this->_fetchValue('uri', $key, $alt);
+		return $this->_arg('uri', $key, $alt);
 	}
 	
 	/**
@@ -230,7 +230,7 @@ class Spark_Request {
 	 * @return mixed The value of $http[$key], or the alternate value
 	 */
 	public function http($key = null, $alt = null) {
-		return $this->_fetchValue('http', strtolower($key), $alt);
+		return $this->_arg('http', strtolower($key), $alt);
 	}
 	
 	/**
