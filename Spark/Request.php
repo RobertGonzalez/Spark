@@ -94,11 +94,35 @@ class Spark_Request {
 	 */
 	public $uri = array();
 	
-	/**
-	 * Object constructor
+    /**
+     * Instance holder for the singleton instance of this object
+     * 
+     * @access private
+     * @static
+     * @var Spark_Request
+     */
+    private static $_instance = null;
+    
+    /**
+     * Gets the singleton instance for this object
+     * 
+     * @access public
+     * @static
+     * @return Spark_Request
+     */
+    public static function getInstance() {
+        if (null === self::$_instance) {
+            self::$_instance = new self;
+        }
+        
+        return self::$_instance;
+    }
+    
+    /**
+	 * Private singleton object constructor
 	 */
-	public function __construct() {
-		$this->fetchGlobals();
+	private function __construct() {
+		$this->_setArgs();
 	}
 	
 	/**
@@ -276,8 +300,10 @@ class Spark_Request {
 	 * 
 	 * Fetches information from the SUPER GLOBAL arrays, normalizes HTTP header 
 	 * keys and handles magic quotes.
+     * 
+     * @access protected
 	 */
-	public function fetchGlobals() {
+	protected function _setArgs() {
 		/**
 		 * Create a mock global array here for looping and setting from next
 		 * 
@@ -340,7 +366,7 @@ class Spark_Request {
 		foreach ($this->server as $key => $val) {
 			
 			// We are only interested in the HTTP_* family 
-			if (substr($key, 0, 4) == 'HTTP') {
+			if (substr($key, 0, 5) == 'HTTP_') {
 				// normalize the header key to lower-case
 				$nicekey = strtolower(
 					str_replace('_', '-', substr($key, 5))
@@ -445,7 +471,7 @@ class Spark_Request {
 	}
 	
 	/**
-	 * Common method to get a request value and return it.
+	 * Common method to get a request argument value and return it.
 	 * 
 	 * @access protected
 	 * @param string $var The request variable to fetch from: get, post, etc.
@@ -453,11 +479,11 @@ class Spark_Request {
 	 * @param string $alt The alternative default value to return if the requested key does not exist.
 	 * @return mixed The requested value, or the alternative default value.
 	 */
-	protected function _fetchValue($var, $key, $alt) {
+	protected function _arg($var, $key, $alt) {
 		// get the whole property, or just one key?
 		if ($key === null) {
-			// no key selected, return the whole array
-			return $this->{$var};
+			// no key selected, return the whole array if it exists
+            return property_exists($this, $key) ? $this->{$var} : array();
 		} elseif (array_key_exists($key, $this->{$var})) {
 			// found the requested key, so return it
 			return $this->{$var}[$key];
