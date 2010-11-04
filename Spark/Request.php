@@ -5,7 +5,6 @@
  * @category Spark
  * @package Spark
  * @author Robert Gonzalez <robert@robert-gonzalez.com>
- * @version $Id$
  */
 /**
  * Library request object
