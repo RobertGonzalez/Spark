@@ -7,7 +7,7 @@
  * @author Robert Gonzalez <robert@robert-gonzalez.com>
  */
 /**
- * Library Timer object
+ * Timer object
  * 
  * Handles timings 
  * 
