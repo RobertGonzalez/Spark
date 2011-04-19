@@ -130,4 +130,41 @@ class Spark_Registry {
     public function __isset($label) {
         return $this->has($label);
     }
+	
+	/**
+	 * Removes an entry from the registry
+	 * 
+	 * @access public
+	 * @param string $label The registry entry to unset
+	 * @return void
+	 */
+	public function remove($label) {
+		if ($this->_has($label)) {
+			unset($this->_register[$label]);
+		}
+	}
+	
+	/**
+	 * Magic overloader to remove an entry from the registry
+	 * 
+	 * @access public
+	 * @param string $label The registry entry to unset
+	 * @return void
+	 */
+		public function __unset($label) {
+		$this->remove($label);
+	}
+	
+	/**
+	 * Resets a registry value to something else
+	 * 
+	 * @access public
+	 * @param string $label The registry entry to reset
+	 * @param mixed $value The value you want it to be now
+	 * @return void
+	 */
+	public function reset($label, $value) {
+		$this->remove($label);
+		$this->set($label, $value);
+	}
 }
